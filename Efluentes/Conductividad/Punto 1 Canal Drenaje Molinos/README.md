@@ -1,4 +1,4 @@
-### Modelo de Identificación de Alta Conductividad en Canal de Drenaje de Molinos.
+## Modelo de Identificación de Alta Conductividad en Canal de Drenaje de Molinos.
 
 El presente proyecto pretende generar un modelo que ayude a predecir la presencia de material azucarado en el canal de drenaje del Área de Molinos y así reducir las pérdidas de producto por motivo de derrames. Con apoyo de los ingenieros de producción, se realizó una selección de las variables de proceso que pueden incidir en la conductividad del canal de drenaje. Las variables tomadas en cuenta son las siguientes: 
 
@@ -33,7 +33,7 @@ La idea principal del proyecto es determinar la presencia de alta conductividad 
 La regresión logística es un tipo de modelo de regresión utilizado para predecir la probabilidad de que una observación pertenezca a una de dos o más categorías. A pesar de su nombre, la regresión logística se utiliza comúnmente para problemas de clasificación, no de regresión. La regresión logística se basa en el concepto de la función logística, que es una función *sigmoide* que transforma los valores continuos en un rango de 0 a 1. Esta función se utiliza para modelar la probabilidad de que una observación pertenezca a una clase específica, en nuestro caso una *alta conductividad es una clase POSITIVA* y una *baja conductividad es una clase NEGATIVA*.
 
 
-![Regresión Logística](https://github.com/dsPSA2023/PSA/assets/161398218/aafdb0f4-6cd2-418b-99af-2558f3ed1ff6)
+  ![Regresión Logística](https://github.com/dsPSA2023/PSA/assets/161398218/aafdb0f4-6cd2-418b-99af-2558f3ed1ff6)
 
 Se realizaron 2 análisis al conjunto de datos, el primero sin tomar en cuenta el impacto del día de Zafra y el segundo tomándolo en cuenta.  
 
@@ -53,15 +53,68 @@ El procedimiento realizado en ambos casos se detalla a continuación:
 - Generacion de modelo de regresion logistica con el umbral optimo: El criterio para seleccionar el umbral se propone sea el del "cima". En este método se selecciona un umbral a partir del cual las métricas caen por debajo de un nivel "aceptable", de esta forma, se obtiene una *propuesta de umbral óptima*. La consideración principal es el costo de un error en la clasificación, en nuestro caso tiene más impacto un *Falso Negativo* que un *Falso Positivo*, clasificar que no tendremos alta conductividad cuando la hay, representa la posibilidad de no prevenir un derrame de material azucarado, por lo tanto, una perdida de producto. La métrica más relevante para este caso de estudio es Recall, también conocido como sensibilidad o tasa de verdaderos positivos, el recall indica la capacidad del clasificador para detectar verdaderos positivos. Es fundamental en situaciones donde los falsos negativos tienen un alto costo o impacto, se calcula como el número de predicciones positivas correctas dividido por el número total de positivos.
 
   
-- Evaluación de Metricas Finales:  Con el valor de umbral optimo definido, se entrena un modelo de clasificacion y se evaluan las metricas finales para determinar su capacidad de prediccion. Para este fin se utilizan la matriz de confusion y la grafica AUC.
+- Evaluación de Metricas Finales:  Con el valor de umbral optimo definido, se entrena un modelo de clasificacion y se evaluan las metricas finales para determinar su capacidad de prediccion. Para este fin se utilizan la matriz de confusion y la Curva PR.
 
     - Matriz de Confusión: La matriz de confusión es una herramienta que se utiliza para evaluar el rendimiento de un modelo de clasificación. Es una tabla que muestra la cantidad de aciertos y errores de un modelo en la clasificación de instancias en cada una de las clases.
   
-  ![image](https://github.com/dsPSA2023/PSA/assets/161398218/31991dda-7d3b-406e-8db1-03b66178cc1f)
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/31991dda-7d3b-406e-8db1-03b66178cc1f)
   
-    - AUC: El Área Bajo la Curva (AUC, por sus siglas en inglés) es una métrica comúnmente utilizada para evaluar la calidad de un modelo de clasificación binaria. Representa el área bajo la curva ROC (Receiver Operating Characteristic), que es una representación gráfica de la relación entre la tasa de verdaderos positivos (Recall) y la tasa de falsos positivos (Precision) para diferentes umbrales de clasificación.
+    - Curva PR: La gráfica de precisión y recall es una herramienta de evaluación comúnmente utilizada en problemas de clasificación binaria, especialmente cuando hay un desbalance significativo entre las clases, que es una representación gráfica de la relación entre la tasa de verdaderos positivos (Recall) y la tasa de falsos positivos (Precision) para diferentes umbrales de clasificación. En general, la curva de precisión y recall nos permite visualizar cómo cambia la precisión a medida que se ajusta el recall y viceversa. Esto puede ser útil para comprender el compromiso entre precisión y recall en diferentes puntos de corte y para seleccionar el umbral de decisión óptimo para nuestro problema específico.
    
-  ![image](https://github.com/dsPSA2023/PSA/assets/161398218/3d0f89dd-a432-4426-9e10-7897c840ef2a)
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/49c1f416-8d71-4761-9ac1-87dca0f77f1a)
+
      
-- Variables de importancias por control y permutacion
-- Variables de importancia por... 
+- Determinación de Factores de Importancia: Para la determinación de los factores de importancia se presentan dos perspectivas: Importancia por Magnitud del Factor e Importancia por Control del Factor.
+
+  - Importancia por Magnitud del Factor: Esta importancia es el peso relativo que tiene este factor respecto a los demás factores, para contribuir positivamente o negativamente a la conductividad. Si la contribución es positiva, a mayor magnitud del factor, mayor probabilidad de detectar la clase positiva (mayor probabilidad de alta conductividad). Si la contribución es negativa, a mayor magnitud del factor, mayor probabilidad de detectar la clase negativa (menor probabilidad de alta conductividad).
+  
+  - Importancia por Control del Factor: Esta importancia se calcula a partir del efecto que tiene aleatorizar la variable (manteniendo todas las demás constantes) sobre la conductividad. Esto es especialmente importante para identificar *el efecto que tiene la precisión del control de la variable sobre la conductividad final*.
+
+- Probabilidad de Clase Positiva (Alta Conductividad): El modelo permite conocer cómo cada factor impacta la probabilidad de obtener la **clase positiva** (*alta conductividad*). Para ello se presentan los *incrementos en probabilidad*: *Si el factor tiene un incremento unitario, cuánto aumenta la probabilidad de tener una alta conductividad*.
+
+- Conclusiones:
+Dados los factores de importancia identificados, las recomendaciones son las siguientes:
+  - Para los *factores con mayor importancia por magnitud* se recomienda controlar con un *SP menor* (si la importancia por magnitud es *positiva*) o con un *SP mayor* (si la importancia por magnitud es *negativa*) para *reducir la probabilidad de tener alta conductividad*.
+  - Para conocer *qué tanto incrementar o decrementar el SP del factor*, se verifica su contribución a la *Probabilidad de Clase Positiva*: Si la contribución es positiva, se recomienda reducir el SP. Si la contribución es negativa, se recomienda aumentar el SP. Ambas acciones *reducirán la probabilidad de ocurrencia de la clase positiva* (alta conductividad).
+  - Para los *factores con mayor importancia por control* se recomienda *reducir la varianza de la variable* (reducir su variación si es posible por medios manuales o ajustes de los lazos de control involucrados). En el caso de *importancias negativas*, significa que los algoritmos *no encontraron evidencia de que el control de esta variable importe para la estabilidad de la conductividad*.
+ 
+## Analisis sin Dia de Zafra.
+
+- Agrupamiento de Datos:
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/4687c1e4-a763-4004-aa15-6ad34eb7196f)
+
+- Busqueda del Umbral Optimo:
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/37e38427-b005-4a19-87f9-e4fa2880fa61)
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/a9147c55-0ab4-4844-b5ee-153f6c726851)
+  
+- Generacion de modelo de regresion logistica con el umbral optimo:
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/0fe95fa8-9c69-4f0c-8924-ee3a7a2e1440)
+
+
+- Evaluación de Metricas Finales:
+  - Matriz de Confusion:
+
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/b9d01cea-7238-4d7c-8ad5-32f1dbeee071)
+
+  - Curva PR:
+
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/80a62613-8844-4175-8a77-a6b69b80a0a6)
+ 
+- Determinación de Factores de Importancia:
+  - Importancia por Magnitud de Factor:
+
+     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/779fbeab-4967-4263-906a-38971d3941c9)
+
+  - Importancia por Permutacion de Factor:
+  
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/086ec61c-b684-4dbf-9932-5e30dd96cfd5)
+
+- Probabilidad de Clase Positiva (Alta Conductividad):
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/cbf4c6a5-95ca-4a6c-adca-f4cab039d958)
+
+
