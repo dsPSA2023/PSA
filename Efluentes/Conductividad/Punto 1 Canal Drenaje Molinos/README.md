@@ -83,7 +83,7 @@ Dados los factores de importancia identificados, las recomendaciones son las sig
 
  
 ## Analisis sin Dia de Zafra.
-[Notebook](https://github.com/dsPSA2023/PSA/tree/4e0f66fee5051fb58333692f7bdd920614a5e90c/Efluentes/Conductividad/Punto%201%20Canal%20Drenaje%20Molinos)
+[Notebook](https://github.com/dsPSA2023/PSA/blob/4e0f66fee5051fb58333692f7bdd920614a5e90c/Efluentes/Conductividad/Punto%201%20Canal%20Drenaje%20Molinos/Trazas_Canal_Molinos.ipynb)
 
 - Agrupamiento de Datos:
 
