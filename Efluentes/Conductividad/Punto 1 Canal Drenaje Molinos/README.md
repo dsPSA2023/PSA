@@ -77,8 +77,13 @@ Dados los factores de importancia identificados, las recomendaciones son las sig
   - Para los *factores con mayor importancia por magnitud* se recomienda controlar con un *SP menor* (si la importancia por magnitud es *positiva*) o con un *SP mayor* (si la importancia por magnitud es *negativa*) para *reducir la probabilidad de tener alta conductividad*.
   - Para conocer *qué tanto incrementar o decrementar el SP del factor*, se verifica su contribución a la *Probabilidad de Clase Positiva*: Si la contribución es positiva, se recomienda reducir el SP. Si la contribución es negativa, se recomienda aumentar el SP. Ambas acciones *reducirán la probabilidad de ocurrencia de la clase positiva* (alta conductividad).
   - Para los *factores con mayor importancia por control* se recomienda *reducir la varianza de la variable* (reducir su variación si es posible por medios manuales o ajustes de los lazos de control involucrados). En el caso de *importancias negativas*, significa que los algoritmos *no encontraron evidencia de que el control de esta variable importe para la estabilidad de la conductividad*.
+
+
+
+
  
 ## Analisis sin Dia de Zafra.
+[Notebook](https://github.com/dsPSA2023/PSA/tree/4e0f66fee5051fb58333692f7bdd920614a5e90c/Efluentes/Conductividad/Punto%201%20Canal%20Drenaje%20Molinos)
 
 - Agrupamiento de Datos:
 
