@@ -50,15 +50,18 @@ El procedimiento realizado en ambos casos se detalla a continuación:
         - *Overall:* Media Aritmética de todas las métricas anteriores.
         - *Clase Positiva (%):* Porcentaje de clase positiva presente en el conjunto de datos.
   
-- Generacion de modelo de regresion logistica con el umbral optimo: El criterio para seleccionar el umbral se propone sea el del "cima". En este método se selecciona un umbral a partir del cual las métricas caen por debajo de un nivel "aceptable", de esta forma, se obtiene una *propuesta de umbral óptima*. La consideración principal es el costo de un error en la clasificación, en nuestro caso tiene más impacto un *Falso Negativo* que un *Falso Positivo*, clasificar que no tendremos alta conductividad cuando la hay, representa la posibilidad de no prevenir un derrame de material azucarado, por lo tanto, una perdida de producto. La métrica más relevante para este caso de estudio es Recall, también conocido como sensibilidad o tasa de verdaderos positivos, el recall indica la capacidad del clasificador para detectar verdaderos positivos. Es fundamental en situaciones donde los falsos negativos tienen un alto costo o impacto.
-
-![image](https://github.com/dsPSA2023/PSA/assets/161398218/af30ce16-ced5-4bbc-bd5d-f8b1292743d6)
+- Generacion de modelo de regresion logistica con el umbral optimo: El criterio para seleccionar el umbral se propone sea el del "cima". En este método se selecciona un umbral a partir del cual las métricas caen por debajo de un nivel "aceptable", de esta forma, se obtiene una *propuesta de umbral óptima*. La consideración principal es el costo de un error en la clasificación, en nuestro caso tiene más impacto un *Falso Negativo* que un *Falso Positivo*, clasificar que no tendremos alta conductividad cuando la hay, representa la posibilidad de no prevenir un derrame de material azucarado, por lo tanto, una perdida de producto. La métrica más relevante para este caso de estudio es Recall, también conocido como sensibilidad o tasa de verdaderos positivos, el recall indica la capacidad del clasificador para detectar verdaderos positivos. Es fundamental en situaciones donde los falsos negativos tienen un alto costo o impacto, se calcula como el número de predicciones positivas correctas dividido por el número total de positivos.
 
   
-- Evaluacion del modelo metrica finales
+- Evaluación de Metricas Finales:  Con el valor de umbral optimo definido, se entrena un modelo de clasificacion y se evaluan las metricas finales para determinar su capacidad de prediccion. Para este fin se utilizan la matriz de confusion y la grafica AUC.
 
-![image](https://github.com/dsPSA2023/PSA/assets/161398218/0b48e666-c335-40e1-8bdb-2464026ad73b)
-
-- 
+    - Matriz de Confusión: La matriz de confusión es una herramienta que se utiliza para evaluar el rendimiento de un modelo de clasificación. Es una tabla que muestra la cantidad de aciertos y errores de un modelo en la clasificación de instancias en cada una de las clases.
+  
+  ![image](https://github.com/dsPSA2023/PSA/assets/161398218/31991dda-7d3b-406e-8db1-03b66178cc1f)
+  
+    - AUC: El Área Bajo la Curva (AUC, por sus siglas en inglés) es una métrica comúnmente utilizada para evaluar la calidad de un modelo de clasificación binaria. Representa el área bajo la curva ROC (Receiver Operating Characteristic), que es una representación gráfica de la relación entre la tasa de verdaderos positivos (Recall) y la tasa de falsos positivos (Precision) para diferentes umbrales de clasificación.
+   
+  ![image](https://github.com/dsPSA2023/PSA/assets/161398218/3d0f89dd-a432-4426-9e10-7897c840ef2a)
+     
 - Variables de importancias por control y permutacion
 - Variables de importancia por... 
