@@ -85,23 +85,23 @@ Dados los factores de importancia identificados, las recomendaciones son las sig
 ## Analisis sin Dia de Zafra.
 [Notebook](https://github.com/dsPSA2023/PSA/blob/4e0f66fee5051fb58333692f7bdd920614a5e90c/Efluentes/Conductividad/Punto%201%20Canal%20Drenaje%20Molinos/Trazas_Canal_Molinos.ipynb)
 
-- Agrupamiento de Datos:
+- Agrupamiento de Datos: De las metricas obtenidas por el modelo de Clustering se determina que 3 agrupaciones es la opción mas adecuada. Al identificar cada una de las 3 agrupaciones se observa que los datos de alta conductividad de inicio de zafra pertenecen a 2 agrupaciones distintas por lo que no es posible identificar regiones de operación que determinen la presencia de Alta Conductividad en el canal de drenaje.  
 
    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/4687c1e4-a763-4004-aa15-6ad34eb7196f)
 
-- Busqueda del Umbral Optimo:
+- Busqueda del Umbral Optimo: Al evaluar la metricas de los modelos con diferentes umbrales se observa que el umbral con valor de 250 uS muestra metricas por encima de 75% con un Overall de 80% y una proporcion balanceada de clases, teniendo 51% de presencia de Clase Positiva.  
 
    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/37e38427-b005-4a19-87f9-e4fa2880fa61)
 
    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/a9147c55-0ab4-4844-b5ee-153f6c726851)
   
-- Generacion de modelo de regresion logistica con el umbral optimo:
+- Generacion de modelo de regresion logistica con el umbral optimo: Se elije un umbral de 250 uS y se entrena el modelo de regresion logistica.   
 
    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/0fe95fa8-9c69-4f0c-8924-ee3a7a2e1440)
 
 
-- Evaluación de Metricas Finales:
-  - Matriz de Confusion:
+- Evaluación de Metricas Finales: Las metricas finales con el conjunto de datos de prueba muestran un desepeño aceptable de clasificacion para el modelo con el umbral determinado.  
+  - Matriz de Confusion:  
 
     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/b9d01cea-7238-4d7c-8ad5-32f1dbeee071)
 
@@ -110,15 +110,34 @@ Dados los factores de importancia identificados, las recomendaciones son las sig
     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/80a62613-8844-4175-8a77-a6b69b80a0a6)
  
 - Determinación de Factores de Importancia:
-  - Importancia por Magnitud de Factor:
+  - Importancia por Magnitud de Factor:  El modelo muestra las siguientes variables como mas importantes por Magnitud:
+      - Flujo de Agua de Asepsia a Patio Tándem A (AVG)
+      - Flujo de Agua de Asepsia a Patio Tándem B (STD)
+      - Flujo de Agua de Asepsia a Molinos Tándem A (STD)
+      - Nivel de Chute del Molino 5 Tándem B (AVG)
+      - Nivel de Chute del Molino 4 Tándem B (STD)
+      - Nivel de Chute del Molino 1 Tándem B (AVG)  
 
      ![image](https://github.com/dsPSA2023/PSA/assets/161398218/779fbeab-4967-4263-906a-38971d3941c9)
 
-  - Importancia por Permutacion de Factor:
+  - Importancia por Permutacion de Factor: El modelo muestra las siguientes variables como mas importantes por Control:
+      - Flujo de Agua de Asepsia a Molinos Tándem B (STD)
+      - Flujo de Agua de Asepsia a Patio Tándem A (AVG)
+      - Flujo de Agua de Asepsia a Patio Tándem B (AVG)
+      - Nivel de Chute del Molino 5 Tándem B (AVG)
+      - Nivel de Chute del Molino 1 Tándem A (AVG)  
+
   
     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/086ec61c-b684-4dbf-9932-5e30dd96cfd5)
 
-- Probabilidad de Clase Positiva (Alta Conductividad):
+- Probabilidad de Clase Positiva (Alta Conductividad): El modelo muestra las siguientes variables como mas importantes para el incremento de la Probabilidad de obtener una clase Positiva:
+
+  - Flujo de Agua de Asepsia a Patio Tándem A (AVG): 7% por unidad de aumento. 
+  - Nivel Tanque Jugo Filtrado Tándem B (STD): 5% por unidad de aumento.
+  - Flujo de Agua de Asepsia a Molinos Tándem B (AVG): 3% por unidad de aumento.
+  - Nivel de Chute del Molino 4 Tándem B (STD): 3% por unidad de aumento.
+  - Flujo de Agua de Asepsia a Molinos Tándem A (STD): 2% por unidad de aumento.
+
 
    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/cbf4c6a5-95ca-4a6c-adca-f4cab039d958)
 
