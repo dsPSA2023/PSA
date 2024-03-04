@@ -29,139 +29,154 @@ Estadísticas descriptivas conductividad
   - Media:       1743.00 mg/L
   - Mediana:     1327.00 mg/L 
 
-La idea principal del proyecto es determinar la presencia de altas trazs en el canal de drenaje, esto se realizó mediante la aplicación del algoritmo de regresión logística. Para lo cual se realizó una *transformación* de la variable continua de trazas a una variable binaria de *presencia* o *no presencia* de altas trazas. 
+La idea principal del proyecto es determinar la presencia de altas trazas en el canal de drenaje, esto se realizó mediante la aplicación del algoritmo de regresión logística. Para lo cual se realizó una *transformación* de la variable continua de trazas a una variable binaria de *presencia* o *no presencia* de altas trazas. 
 
 
 Se realizaron 2 análisis al conjunto de datos, el primero sin incluir el día de zafra y el segundo incluyéndolo, para evaluar el impacto que tiene el día de zafra en la variable en estudio.
  
 ## Analisis sin Dia de Zafra.
-[Notebook](https://github.com/dsPSA2023/PSA/blob/bcdcfd4117b736d63e56fb5427a066d5777b22c2/Efluentes/Conductividad/Punto%201%20Canal%20Drenaje%20Molinos/Conductividad_Canal_Molinos.ipynb)
+[Notebook](https://github.com/dsPSA2023/PSA/blob/168615c0c0a49e31a6aad6a195d04aee52d71e81/Efluentes/Trazas/Punto%201%20Canal%20Drenaje%20Molinos/Trazas_Canal_Molinos.ipynb)
 
-- Agrupamiento de Datos: De las metricas obtenidas por el modelo de Clustering se determina que 3 agrupaciones es la opción mas adecuada. Al identificar cada una de las 3 agrupaciones se observa que los datos de alta conductividad de inicio de zafra pertenecen a 2 agrupaciones distintas por lo que no es posible identificar regiones de operación que determinen la presencia de Alta Conductividad en el canal de drenaje.  
+- Agrupamiento de Datos: De las metricas obtenidas por el modelo de Clustering se determina que 3 agrupaciones es la opción mas adecuada. Al identificar cada una de las 3 agrupaciones se observa que los datos de altas trazas de inicio de zafra pertenecen a 3 agrupaciones distintas por lo que no es posible identificar regiones de operación que determinen la presencia de Altas Trazas en el canal de drenaje.  
 
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/4687c1e4-a763-4004-aa15-6ad34eb7196f)
-
-- Busqueda del Umbral Optimo: Al evaluar la metricas de los modelos con diferentes umbrales se observa que el umbral con valor de 250 uS muestra metricas por encima de 78% con un Overall de 80% y una proporcion balanceada de clases, teniendo 51% de presencia de Clase Positiva.  
-
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/27e3052e-91ad-4e1a-b992-95d8730fa107)
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/57d42879-fc81-4f44-8604-ff853c7a5122)
 
 
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/ae5520d5-0f10-4338-9fc2-5fe63bb6bddb)
+- Busqueda del Umbral Optimo: Al evaluar la metricas de los modelos con diferentes umbrales se observa que el umbral con valor de 1250 mg/L muestra metricas por encima de 64% con un Overall de 67% y una proporcion balanceada de clases, teniendo 53% de presencia de Clase Positiva.  
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/d3392ac3-5364-47a8-94d1-0368d898d009)
+
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/c7a1bc9c-772f-47ba-af75-5651df0e011a)
+
 
   
-- Generacion de modelo de regresion logistica con el umbral optimo: Se elije un umbral de 250 uS y se entrena el modelo de regresion logistica.   
+- Generacion de modelo de regresion logistica con el umbral optimo: Se elije un umbral de 1250 mg/L y se entrena el modelo de regresion logistica.   
 
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/2321fe82-ede6-4e1f-8c86-e7290f37bfb8)
-
-
-- Evaluación de Metricas Finales: Las metricas finales con el conjunto de datos de prueba muestran un desepeño aceptable de clasificacion para el modelo con el umbral determinado.  
-  - Matriz de Confusion:  
-
-    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/85281bb2-e3ff-4296-83fa-babd7020eb41)
-
-
-  - Curva PR:
-
-    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/fe7bca8d-b00c-414d-838f-eb58f4740393)
-
- 
-- Determinación de Factores de Importancia:
-  - Importancia por Magnitud de Factor:  El modelo muestra las siguientes variables como mas importantes por Magnitud:
-      - Flujo de Agua de Asepsia a Patio Tándem A (AVG)
-      - Flujo de Agua de Asepsia a Patio Tándem B (STD)
-      - Flujo de Agua de Asepsia a Molinos Tándem A (STD)
-      - Nivel de Chute del Molino 5 Tándem B (AVG)
-      - Nivel de Chute del Molino 4 Tándem B (STD) 
-
-     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/779fbeab-4967-4263-906a-38971d3941c9)
-
-  - Importancia por Permutacion de Factor: El modelo muestra las siguientes variables como mas importantes por Control:
-      - Flujo de Agua de Asepsia a Molinos Tándem B (STD)
-      - Flujo de Agua de Asepsia a Patio Tándem A (AVG)
-      - Flujo de Agua de Asepsia a Patio Tándem B (AVG)
-      - Nivel de Chute del Molino 5 Tándem B (AVG)
-      - Nivel de Chute del Molino 1 Tándem A (AVG)  
-
-  
-    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/086ec61c-b684-4dbf-9932-5e30dd96cfd5)
-
-- Probabilidad de Clase Positiva (Alta Conductividad): El modelo muestra las siguientes variables como mas importantes para el incremento de la Probabilidad de obtener una clase Positiva:
-
-  - Flujo de Agua de Asepsia a Patio Tándem A (AVG): 7% por unidad de aumento. 
-  - Nivel Tanque Jugo Filtrado Tándem B (STD): 5% por unidad de aumento.
-  - Flujo de Agua de Asepsia a Molinos Tándem B (AVG): 3% por unidad de aumento.
-  - Nivel de Chute del Molino 4 Tándem B (STD): 3% por unidad de aumento.
-  - Flujo de Agua de Asepsia a Molinos Tándem A (STD): 2% por unidad de aumento.
-
-
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/cbf4c6a5-95ca-4a6c-adca-f4cab039d958)
-
-
-## Analisis Con Dia de Zafra
-[Notebook](https://github.com/dsPSA2023/PSA/blob/bcdcfd4117b736d63e56fb5427a066d5777b22c2/Efluentes/Conductividad/Punto%201%20Canal%20Drenaje%20Molinos/Conductividad_Canal_Molinos_Dia_Zafra.ipynb).
-
-- Agrupamiento de Datos: De las metricas obtenidas por el modelo de Clustering se determina que 3 agrupaciones es la opción mas adecuada. Al identificar cada una de las 3 agrupaciones se observa que los datos de alta conductividad de inicio de zafra pertenecen a 2 agrupaciones distintas por lo que no es posible identificar regiones de operación que determinen la presencia de Alta Conductividad en el canal de drenaje.  
-
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/445e09d3-dbe4-4357-a31d-7442b02a6013)
-
-
-- Busqueda del Umbral Optimo: Al evaluar la metricas de los modelos con diferentes umbrales se observa que el umbral con valor de 250 uS muestra metricas por encima de 78% con un Overall de 80% y una proporcion balanceada de clases, teniendo 51% de presencia de Clase Positiva.  
-
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/c98abd24-ca89-47d8-9429-c72f12776c8a)
-
-
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/2eb74b3b-da1f-4657-8a32-31e03f53a151)
-
-  
-- Generacion de modelo de regresion logistica con el umbral optimo: Se elije un umbral de 250 uS y se entrena el modelo de regresion logistica.   
-
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/df933527-ebf8-40d4-ad35-d050a9bbdec9)
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/8cc446e2-89b9-4805-b646-e18c49c082ad)
 
 
 
 - Evaluación de Metricas Finales: Las metricas finales con el conjunto de datos de prueba muestran un desepeño aceptable de clasificacion para el modelo con el umbral determinado.  
   - Matriz de Confusion:  
 
-    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/d6496a72-9800-4757-902c-42766b808a19)
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/09c49c46-ac91-4d51-8939-0504c745e4fa)
+
 
 
   - Curva PR:
 
-    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/03cf9b9a-1235-4eaf-92ec-1c7e1441a1de)
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/c1cfd7ab-0a9c-4823-ae99-79c704fe9561)
+
 
  
 - Determinación de Factores de Importancia:
   - Importancia por Magnitud de Factor:  El modelo muestra las siguientes variables como mas importantes por Magnitud:
-      - Flujo de Agua de Asepsia a Molinos Tándem A (STD)
-      - Flujo de Agua de Asepsia a Patio Tándem B (STD)
-      - Flujo de Agua de Asepsia a Patio Tándem A (AVG)
-      - Nivel de Chute del Molino 4 Tándem B (STD)
-      - Nivel de Chute del Molino 1 Tándem B (AVG)
+      - Nivel de Chute del Molino 3 Tándem A (STD)
+      - Nivel del Vaso A1 (AVG)
+      - Nivel del Vaso B4 (AVG)
+      - Nivel del Vaso D1 (STD)
+      - Nivel del Vaso A6 (STD) 
 
-     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/216555f9-2c77-4d8c-b322-6647bc82af22)
+     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/ddb638c4-ccbf-4a1c-9b23-a56184c8007d)
 
 
   - Importancia por Permutacion de Factor: El modelo muestra las siguientes variables como mas importantes por Control:
-      - Flujo de Agua de Asepsia a Molinos Tándem B (STD)
-      - Dia de Zafra
-      - Nivel de Chute del Molino 1 Tándem A (AVG)
-      - Flujo de Agua de Asepsia a Patio Tándem B (STD)
-      - Nivel de Chute del Molino 5 Tándem B (AVG)
-      - Nivel de Chute del Molino 6 Tándem A (AVG)
-        
+      - Nivel de Chute del Molino 3 Tándem A (STD)
+      - Nivel del Vaso C5 (AVG)
+      - Flujo de Agua de Asepsia a Molinos Tándem A (STD)
+      - Nivel del Vaso E4 (STD)
+      - Nivel del Vaso D2 (STD)
+
   
-      ![image](https://github.com/dsPSA2023/PSA/assets/161398218/05a34dd1-c3a5-4278-994d-a75a1758976c)
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/3002edeb-c65e-4338-9fee-d9a99a4f8861)
 
 
 - Probabilidad de Clase Positiva (Alta Conductividad): El modelo muestra las siguientes variables como mas importantes para el incremento de la Probabilidad de obtener una clase Positiva:
 
-  - Flujo de Agua de Asepsia a Patio Tándem A (AVG): 5% por unidad de aumento. 
-  - Nivel Tanque Jugo Filtrado Tándem B (STD): 5% por unidad de aumento.
-  - Flujo de Agua de Asepsia a Molinos Tándem A (STD): 3% por unidad de aumento.
-  - Flujo de Agua de Asepsia a Molinos Tándem B (AVG): 3% por unidad de aumento.
-  - Nivel de Chute del Molino 4 Tándem B (STD): 3% por unidad de aumento.
-  
+  - Nivel del Vaso A6 (STD): 11% por unidad de aumento. 
+  - Nivel del Vaso A6 (STD): 11% por unidad de aumento.
+  - Nivel de Chute del Molino 3 Tándem A (STD): 6% por unidad de aumento.
+  - Nivel del Vaso B2 (STD): 5% por unidad de aumento. 
+  - Nivel del Vaso E4 (STD): 5% por unidad de aumento.
 
-   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/985f438f-8fa3-4d75-b64f-182dfb2c9d48)
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/fd6c30f2-e093-4f43-9a12-a942adb632a5)
+
+
+
+## Analisis con Dia de Zafra.
+[Notebook](https://github.com/dsPSA2023/PSA/blob/168615c0c0a49e31a6aad6a195d04aee52d71e81/Efluentes/Trazas/Punto%201%20Canal%20Drenaje%20Molinos/Trazas_Canal_Molinos_Dia_Zafra.ipynb)
+
+- Agrupamiento de Datos: De las metricas obtenidas por el modelo de Clustering se determina que 3 agrupaciones es la opción mas adecuada. Al identificar cada una de las 3 agrupaciones se observa que los datos de altas trazas de inicio de zafra pertenecen a 3 agrupaciones distintas por lo que no es posible identificar regiones de operación que determinen la presencia de Altas Trazas en el canal de drenaje.  
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/6166f4db-9674-406c-97f5-b4ce0b50ac51)
+
+
+- Busqueda del Umbral Optimo: Al evaluar la metricas de los modelos con diferentes umbrales se observa que el umbral con valor de 1250 mg/L muestra metricas por encima de 65% con un Overall de 69% y una proporcion balanceada de clases, teniendo 53% de presencia de Clase Positiva.  
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/43ed6ea3-c27b-43bc-a1ad-3203e960bd1d)
+
+
+
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/62914c55-69fc-4ebf-a232-b45666f8b9e7)
+
+
+
+  
+- Generacion de modelo de regresion logistica con el umbral optimo: Se elije un umbral de 1250 mg/L y se entrena el modelo de regresion logistica.   
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/355f8031-231a-46c4-9329-722d45c497fa)
+
+
+
+
+
+- Evaluación de Metricas Finales: Las metricas finales con el conjunto de datos de prueba muestran un desepeño aceptable de clasificacion para el modelo con el umbral determinado.  
+  - Matriz de Confusion:  
+
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/09c49c46-ac91-4d51-8939-0504c745e4fa)
+
+
+
+  - Curva PR:
+
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/c1cfd7ab-0a9c-4823-ae99-79c704fe9561)
+
+
+ 
+- Determinación de Factores de Importancia:
+  - Importancia por Magnitud de Factor:  El modelo muestra las siguientes variables como mas importantes por Magnitud:
+      - Nivel del Vaso A1 (AVG)
+      - Nivel de Chute del Molino 3 Tándem A (STD)
+      - Nivel del Vaso B4 (AVG)
+      - Nivel del Vaso D1 (STD)
+      - Nivel del Vaso E3 (AVG) 
+
+     ![image](https://github.com/dsPSA2023/PSA/assets/161398218/c0d0cc71-56b8-410a-9de5-9a86508a94f2)
+
+
+  - Importancia por Permutacion de Factor: El modelo muestra las siguientes variables como mas importantes por Control:
+      - Nivel del Vaso C5 (AVG)
+      - Nivel de Chute del Molino 3 Tándem A (STD)
+      - Nivel del Vaso E4 (STD)
+      - Nivel de Chute del Molino 4 Tándem A (AVG)
+      - Flujo de Agua de Asepsia a Molinos Tándem A (STD)
+
+  
+    ![image](https://github.com/dsPSA2023/PSA/assets/161398218/87d5a77e-d067-4308-bbce-a2970e7d6389)
+
+
+- Probabilidad de Clase Positiva (Alta Conductividad): El modelo muestra las siguientes variables como mas importantes para el incremento de la Probabilidad de obtener una clase Positiva:
+
+  - Nivel del Vaso A6 (STD): 12% por unidad de aumento. 
+  - Nivel del Vaso D1 (STD): 11% por unidad de aumento.
+  - Nivel de Chute del Molino 3 Tándem A (STD): 6% por unidad de aumento.
+  - Nivel de Chute del Molino 2 Tándem A (STD): 6% por unidad de aumento. 
+  - Nivel del Vaso E4 (STD): 5% por unidad de aumento.
+
+
+   ![image](https://github.com/dsPSA2023/PSA/assets/161398218/f583d1c9-03e2-480c-8a14-92210c266a44)
 
 
