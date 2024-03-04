@@ -34,12 +34,12 @@ El procedimiento realizado en ambos casos se detalla a continuación:
     
   - Búsqueda del umbral óptimo: Se aplicó una *binarización* a la variable de conductividad. La binarización se implementó de forma que: Una *alta conductividad es una clase POSITIVA* y una *baja conductividad es una clase NEGATIVA*. Adicionalmente, debido a la distribución *sesgada* de la variable de conductividad, es posible que una mala selección del umbral produzca un desbalance en el conjunto de datos y, por lo tanto, las métricas de detección del algoritmo de regresión logística no sean óptimas.  Para explorar el umbral de conductividad, se implementa un algoritmo que explora *distintos umbrales de conductividad* y grafica las métricas de detección para cada selección:
   
-        - *Precision:* Habilidad del Clasificador de minimizar Falsos Positivos.
-        - *Accuracy:* Habilidad del Clasificador de Detectar Verdaderos Positivos y Verdaderos Negativos.
-        - *Recall:* Habilidad del Clasificador de Detectar Verdaderos Positivos.
-        - *F1:* Media Ponderada de la Precision y el Recall.
-        - *Overall:* Media Aritmética de todas las métricas anteriores.
-        - *Clase Positiva (%):* Porcentaje de clase positiva presente en el conjunto de datos.
+     - *Precision:* Habilidad del Clasificador de minimizar Falsos Positivos.
+     - *Accuracy:* Habilidad del Clasificador de Detectar Verdaderos Positivos y Verdaderos Negativos.
+     - *Recall:* Habilidad del Clasificador de Detectar Verdaderos Positivos.
+     - *F1:* Media Ponderada de la Precision y el Recall.
+     - *Overall:* Media Aritmética de todas las métricas anteriores.
+     - *Clase Positiva (%):* Porcentaje de clase positiva presente en el conjunto de datos.
   
 - Generacion de modelo de regresion logistica con el umbral optimo: El criterio para seleccionar el umbral se propone sea el del "cima". En este método se selecciona un umbral a partir del cual las métricas caen por debajo de un nivel "aceptable", de esta forma, se obtiene una *propuesta de umbral óptima*. La consideración principal es el costo de un error en la clasificación, en nuestro caso tiene más impacto un *Falso Negativo* que un *Falso Positivo*, clasificar que no tendremos alta conductividad cuando la hay, representa la posibilidad de no prevenir un derrame de material azucarado, por lo tanto, una perdida de producto. La métrica más relevante para este caso de estudio es Recall, también conocido como sensibilidad o tasa de verdaderos positivos, el recall indica la capacidad del clasificador para detectar verdaderos positivos. Es fundamental en situaciones donde los falsos negativos tienen un alto costo o impacto, se calcula como el número de predicciones positivas correctas dividido por el número total de positivos.
 
