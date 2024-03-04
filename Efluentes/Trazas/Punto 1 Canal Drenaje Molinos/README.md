@@ -12,22 +12,24 @@ Se utilizan los datos de Laboratorio sobre trazas en el canal de molinos. Dado q
 El conjunto de datos cuenta con 53 variables y con 580 observaciones de los primeros 80 días de la presente zafra.  Se definió como variable objetivo la medición de trazas del canal de drenaje; a continuación se muestra el comportamiento de las trazas en el tiempo. 
 
 
-![image](https://github.com/dsPSA2023/PSA/assets/161398218/40e437a8-b1c8-4ebe-ba60-f1a5d0f95336)
+![image](https://github.com/dsPSA2023/PSA/assets/161398218/d2b6d9e8-0dad-453b-87dc-b0499206ddad)
 
-El valor de la conductividad comenzó a disminuir alrededor de la observación 550 (día de zafra 23) y vuelve a presentar valores altos cerca de la observación 1400 (día de zafra 59), alcanzando valores por arriba de 4000 uS.  
 
-La conductividad presenta una distribución sesgada a la derecha, alcanzando valores arriba de 8000 uS.     
+El valor de las trazas comenzó a disminuir alrededor de la observación 150 (día de zafra 23) y vuelve a presentar valores altos cerca de la observación 565 (día de zafra 95), alcanzando valores por arriba de 2000 mg/L.  
 
-![image](https://github.com/dsPSA2023/PSA/assets/161398218/0b7be937-21fc-4389-ac02-2df28f52bfc0)
+La conductividad presenta una distribución sesgada a la derecha, alcanzando valores arriba de 8000 mg/L.     
+
+![image](https://github.com/dsPSA2023/PSA/assets/161398218/96e5a241-f6c8-4286-a190-1ba9d8aa927b)
+
 
 Estadísticas descriptivas conductividad 
 
-  - Mínimo:         5.15 uS
-  - Máximo:      8273.00 uS 
-  - Media:        460.22 uS
-  - Mediana:      269.84 uS 
+  - Mínimo:         8.00 mg/L
+  - Máximo:      9249.00 mg/L 
+  - Media:       1743.00 mg/L
+  - Mediana:     1327.00 mg/L 
 
-La idea principal del proyecto es determinar la presencia de alta conductividad en el canal de drenaje, esto se realizó mediante la aplicación del algoritmo de regresión logística. Para lo cual se realizó una *transformación* de la variable continua de conductividad a una variable binaria de *presencia* o *no presencia* de alta conductividad. 
+La idea principal del proyecto es determinar la presencia de altas trazs en el canal de drenaje, esto se realizó mediante la aplicación del algoritmo de regresión logística. Para lo cual se realizó una *transformación* de la variable continua de trazas a una variable binaria de *presencia* o *no presencia* de altas trazas. 
 
 
 Se realizaron 2 análisis al conjunto de datos, el primero sin incluir el día de zafra y el segundo incluyéndolo, para evaluar el impacto que tiene el día de zafra en la variable en estudio.
